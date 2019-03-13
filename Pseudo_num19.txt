@@ -1,0 +1,42 @@
+//Pseudo pŕactica.
+
+var i, j : int
+var A : array[n] of char
+var B : array[m] of char
+    tamA := B.length()
+    tamB := sizeof(B;
+    contador:=0
+    repeticion:=0
+    para i:=0..tamA hacer 
+	j:=0
+    	mientras (A[i]!=B[j]) hacer 
+	     i+=1
+    	fin_mientras
+    	 i+=1
+    	 j+=1
+	mientras (contador<tamB) hacer
+	     si (A[i]=B[j]) entonces 
+	     
+		si  (contador=tamB-1) entonces 
+                   repeticion+=1
+		   indice := i
+		   i+=1
+                   j:=0
+                   contador:=0
+            	sino 
+                   contador+=1
+                   j+=1
+               	   i+=1
+            	fin_si
+   	     sino 
+             	contador:=tamB
+             fin_si
+	     
+       fin_mientras
+       si (repeticion > max) entonces
+       	  max := repeticion
+     fin_para
+     inicio := (i-repeticion*tamB+1)
+     repeticionmax := max
+     Escribir("El valor de inicio de la concatenación es: ", inicio)
+     Escribir("Número de veces que aparece B es:", repeticionmax)
