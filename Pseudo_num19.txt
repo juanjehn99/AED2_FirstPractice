@@ -3,8 +3,8 @@
 var i, j : int
 var A : array[n] of char
 var B : array[m] of char
-    tamA := B.length()
-    tamB := sizeof(B;
+    tamA := A.length()
+    tamB := B.length()
     contador:=0
     repeticion:=0
     para i:=0..tamA hacer 
