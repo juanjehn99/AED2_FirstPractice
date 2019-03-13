@@ -1,0 +1,43 @@
+array A[];
+array B[];
+int i, j;
+tamA = sizeof(A);
+tamB = sizeof(B);
+
+contador=0;
+repeticion=0;
+for (i=0;i<tamA;i++)
+{
+    j=0;
+    while (A[i]!=B[j])
+    {
+        i++;
+    }
+    i++;
+    j++;
+    while (contador<tamB)
+    {
+        if A[i]=B[j]
+        {
+            if (contador=tamB-1)
+            {
+                repeticion++;
+                i++;
+                j=0;
+                contador=0;
+            }
+            else
+            {
+                contador++;
+                j++;
+                i++;
+            }
+        }
+        else
+        {
+            contador=tamB;
+        }
+    }
+    
+}
+inicio = (i+1-tamB);
