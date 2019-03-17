@@ -1,7 +1,7 @@
 //Pseudo pŕactica.
 
 var i, j : int
-var contador, repeticion, tamA, tamB, inicio, max : int
+var contador, repeticion, tamA, tamB, inicio, max, indice, indicemax : int
 var A : array[n] of char
 var B : array[m] of char
     tamA := A.length()
@@ -16,9 +16,9 @@ var B : array[m] of char
     	fin_mientras
     	 i+=1
     	 j+=1
+	 contador+=1
 	mientras (contador<tamB) hacer
 	     si (A[i]=B[j]) entonces 
-	     
 		si  (contador=tamB-1) entonces 
                    repeticion+=1
 		   indice := i
@@ -32,12 +32,12 @@ var B : array[m] of char
             	fin_si
    	     sino 
              	contador:=tamB
-             fin_si
-	     
+             fin_si	     
        fin_mientras
        si (repeticion > max) entonces
        	  max := repeticion
+	  indicemax := indice
      fin_para
-     inicio := (i-repeticion*tamB+1)
+     inicio := (indicemax-repeticion*tamB+1)
      Escribir("El valor de inicio de la concatenación es: ", inicio)
      Escribir("Número de veces que aparece B es:", max)
