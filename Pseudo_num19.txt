@@ -17,6 +17,7 @@ var B : array[m] of char
     	mientras (A[i]!=B[j]) hacer 
 	     i+=1
 	     repeticion := 0
+	     anterior := false
     	fin_mientras
     	 i+=1
     	 j+=1
