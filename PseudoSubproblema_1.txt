@@ -1,0 +1,24 @@
+//Primer subproblema.
+
+var A[n] of char
+var B[m] of char
+var indices[] of char
+k := 0
+elementos := 0
+mientras i < n hacer
+  j := 0
+  mientras A[i] = B[j] hacer 
+  	   i+=1
+	   j+=1
+	   elementos += 1
+	   si elementos = m entonces
+	      k += 1
+	      j := 0
+	      indices[k] := i - m
+	      elementos := 0
+	   fin_si       	  
+   fin_mientras
+   i+=1
+fin_para
+   
+     
