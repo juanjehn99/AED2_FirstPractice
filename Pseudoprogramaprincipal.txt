@@ -41,7 +41,7 @@ mientras l<length(indices) hacer
 	indicemax := l - suma*tamB
      fin_si
      l += 1
-fin_para
+fin_mientras
 
 Escribir("La max suma es: ", max)
 Escribir("El indice del mas grande es: ", indicemax)
