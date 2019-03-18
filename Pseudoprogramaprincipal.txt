@@ -30,7 +30,7 @@ mientras i < n hacer
    fin_mientras
    i+=1
 fin_mientras
-mientras l<lenght(indices) hacer
+mientras l<length(indices) hacer
      mientras (indices[l+1]-indices[l] = tamB) hacer
         suma += 1
 	l+=1
