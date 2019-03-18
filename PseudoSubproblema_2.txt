@@ -5,7 +5,7 @@ var indices[] of int
 suma := 0
 max := 0
 i:=0
-mientras i<lenght(indices) hacer
+mientras i<length(indices) hacer
      mientras (indices[i+1]-indices[i] = tamB) hacer
         suma += 1
 	i+=1
