@@ -1,5 +1,6 @@
 //Programa principal.
 
+var i, k, l, j : int
 var max, indicemax : int
 var suma : int
 var A[n] of char
@@ -39,6 +40,7 @@ mientras l<length(indices) hacer
      	max := suma
 	indicemax := l - suma*tamB
      fin_si
+     l += 1
 fin_para
 
 Escribir("La max suma es: ", max)
