@@ -1,0 +1,19 @@
+//Segundo subproblema
+var max : int
+var suma : int
+var indices[] of int
+suma := 0
+max := 0
+i:=0
+mientras i<lenght(indices) hacer
+     mientras (indices[i+1]-indices[i] = tamB) hacer
+        suma += 1
+	i+=1
+     fin_si
+     si suma > max entonces
+     	max := suma
+	indicemax := i - suma*tamB
+     fin_si
+fin_para
+
+Escribir("La max suma es: ", max)
