@@ -28,6 +28,7 @@ mientras i < n hacer
 	      	 j+=1
 	      si_no
 		 j := 0
+	      fin_si
 	   fin_si
    fin_mientras
    i+=1
@@ -36,7 +37,7 @@ mientras l<length(indices) hacer
      mientras (indices[l+1]-indices[l] = tamB) hacer
         suma += 1
 	l+=1
-     fin_si
+     fin_mientras
      si suma > max entonces
      	max := suma
 	indicemax := l - suma*tamB
