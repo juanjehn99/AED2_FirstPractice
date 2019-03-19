@@ -45,5 +45,5 @@ mientras l<length(indices) hacer
      l += 1
 fin_mientras
 
-Escribir("La max suma es: ", max)
-Escribir("El indice del mas grande es: ", indicemax)
+Escribir("La maxima concatenacion es: ", max)
+Escribir("El indice en cuestion es: ", indicemax)
