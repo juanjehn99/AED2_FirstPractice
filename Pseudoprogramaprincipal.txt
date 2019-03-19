@@ -1,11 +1,12 @@
 //Programa principal.
 
 var i, k, l, j : int
-var max, indicemax : int
+var max, indicemax, elementos : int
 var suma : int
 var A[n] of char
 var B[m] of char
 var indices[] of int
+
 k := 0
 i:=0
 elementos := 0
