@@ -47,3 +47,22 @@ fin_mientras
 
 Escribir("La maxima concatenacion es: ", max)
 Escribir("El indice en cuestion es: ", indicemax)
+
+
+
+//Dividir método.
+
+Dividir(p,q)
+	return m := round((q - p)/2)
+
+//Pequeño método:
+
+Pequeño(p, q)
+	if q - p <= base
+	   return true
+	else
+	   return false
+	   
+
+
+	
