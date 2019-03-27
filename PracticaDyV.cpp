@@ -93,8 +93,7 @@ int main(int argc, char *argv[])
     }
     else
     {
-        cout << "El valor de inicio de la concatenacion mas grande es: " << inicio << endl;
-    }
+        cout << "El valor de inicio de la concatenacion mas grande es: " << inicio << endl;   }
 
     return 0;
 }
