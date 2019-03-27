@@ -62,6 +62,12 @@ Pequeño(p, q)
 	   return true
 	else
 	   return false
+
+
+k := Dividir(p,q)
+solucion := Combinar(DivideYVencerás(p, k-1), DivideYVencerás(k, q))
+
+k + m - 2
 	   
 
 
