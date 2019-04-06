@@ -12,8 +12,8 @@ class Solucion{
 }
 
 class PalabrasGenerador(){
-  string cadenaA;
-  string cadenaB;
+  string cadenaA[];
+  string cadenaB[];
 }
 
 Solucion ResolucionDirecta(int p, int q, int base, char A[], char B[]){
@@ -118,12 +118,12 @@ PalabrasGenerador GeneradorDePalabras(){
 
   for (int j = 0; j < numRandLarga; j++){
     numLetra = (rand() % 25);
-    PalabraGenerada.cadenaA = alfabeto[numLetra];
+    PalabraGenerada.cadenaA[j] = alfabeto[numLetra];
   }
 
   for (int k = 0; k < numRamdCorta; k++){
     numLetra = (rand() % 25);
-    PalabraGenerada.cadenaB = alfabeto[numLetra];
+    PalabraGenerada.cadenaB[k] = alfabeto[numLetra];
   }
 
   return PalabraGenerada;  
@@ -132,10 +132,9 @@ PalabrasGenerador GeneradorDePalabras(){
 int main(int argc, char *argv[]){
   PalabrasGenerador PalabraGenerada = GeneradorDePalabras();
   int p = 0;
-  int q = strlen(PalabraGenerada.cadenaA);
-  int base = strlen(PalabraGenerada.cadenaB);
-  char A[q];
-  Solucion SolucionProblema = DivideVenceras(p, q, base, A[], B[]);
+  int q = sizeof(PalabraGenerada.cadenaA[]);
+  int base = sizeof(PalabraGenerada.cadenaB[]);  
+  Solucion SolucionProblema = DivideVenceras(p, q, base, PalabraGenerada.cadenaA[], PalabraGenerada.cadenaB[]);
   cout << "El mayor num de concatenaciones de B en A es: " << SolucionProblema.NumConcatenaciones << endl;
   cout << "El indice en el que empieza es: " << SolucionProblema.Indice << endl;
 }
