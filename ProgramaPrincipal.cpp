@@ -47,6 +47,23 @@ PalabrasGenerador GeneradorDePalabras(){
   PalabrasGenerador PalabraGenerada;
   string CadenaLarga;
   string CadenaCorta;
+  int numRandLarga;
+  int numRandCorta;
+  char Alfabeto[26];
+
+  for (int i=0; i<26; i++){
+    alfabeto[i] = a;
+    a++;
+  }
+
+  numRandLarga = rand();
+  numRandCorta = (rand() % 10) + 1;
+
+  for (int j = 0; j < numRandLarga; j++){
+    
+  }
+
+  
   
 }
 
