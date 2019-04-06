@@ -64,5 +64,13 @@ Pequeño(p, q)
 	   return false
 	   
 
+//Esquema de divide y vencerás.
 
-	
+Concatenaciones(p,q : indice)
+var m : indice
+    si Pequeño(p,q) entonces
+       solucion:= SolucionDirecta(p,q)
+    sino
+       m := Dividir(p,q)
+       solucion := Combinar(Concatenaciones(p, m+1)), Concatenaciones(m+1, q))
+    finsi
