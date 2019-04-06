@@ -1,0 +1,76 @@
+//Programa principal.
+
+var i, k, l, j : int
+var max, indicemax, elementos : int
+var suma : int
+var A[n] of char
+var B[m] of char
+var indices[] of int
+
+k := 0
+i:=0
+elementos := 0
+suma := 0
+max := 0
+l:=0 
+mientras i < n hacer
+  j := 0
+  mientras A[i] = B[j] hacer 
+  	   i+=1
+	   elementos += 1
+	   si elementos = m entonces
+	      k += 1
+	      j := 0
+	      indices[k] := i - m
+	      elementos := 0
+	   si_no
+	      si j < m entonces
+	      	 j+=1
+	      si_no
+		 j := 0
+	      fin_si
+	   fin_si
+   fin_mientras
+   i+=1
+fin_mientras
+mientras l<length(indices) hacer
+     mientras (indices[l+1]-indices[l] = tamB) hacer
+        suma += 1
+	l+=1
+     fin_mientras
+     si suma > max entonces
+     	max := suma
+	indicemax := l - suma*tamB
+     fin_si
+     l += 1
+fin_mientras
+
+Escribir("La maxima concatenacion es: ", max)
+Escribir("El indice en cuestion es: ", indicemax)
+
+
+
+//Dividir método.
+
+Dividir(p,q)
+	return m := round((q - p)/2)
+
+//Pequeño método:
+
+Pequeño(p, q)
+	if q - p <= base
+	   return true
+	else
+	   return false
+	   
+
+//Esquema de divide y vencerás.
+
+Concatenaciones(p,q : indice)
+var m : indice
+    si Pequeño(p,q) entonces
+       solucion:= SolucionDirecta(p,q)
+    sino
+       m := Dividir(p,q)
+       solucion := Combinar(Concatenaciones(p, m+1)), Concatenaciones(m+1, q))
+    finsi
