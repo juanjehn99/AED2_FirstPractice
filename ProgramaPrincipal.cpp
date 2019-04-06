@@ -11,6 +11,11 @@ class Solucion{
   int Indice;
 }
 
+class PalabrasGenerador(){
+  string cadenaA;
+  string cadenaB;
+}
+
 Solucion ResolucionDirecta(){
   
 }
@@ -38,6 +43,13 @@ void DivideVenceras(int p, int q, int base){
   }
 }
 
-int main(int argc, char *argv[]){
+PalabrasGenerador GeneradorDePalabras(){
+  PalabrasGenerador PalabraGenerada;
+  string CadenaLarga;
+  string CadenaCorta;
   
+}
+
+int main(int argc, char *argv[]){
+  GeneradorDePalabras
 }
