@@ -31,14 +31,14 @@ bool Pequeno(int p, int q, int base){
   else return false;
 }
 
-void DivideVenceras(int p, int q, int base){
+Solucion DivideVenceras(int p, int q, int base){
   int k;
   Solucion solucion;
   if Pequeno(p, q, base){
        solucion = ResolucionDirecta();
   }
   else {
-    k = Dividir(p, q, base);
+    k = Dividir(p, q);
     solucion = Combinar(DivideVenceras(p, k-1, base), DivideVenceras(k, q));
   }
 }
@@ -60,13 +60,24 @@ PalabrasGenerador GeneradorDePalabras(){
   numRandCorta = (rand() % 10) + 1;
 
   for (int j = 0; j < numRandLarga; j++){
-    
+    numLetra = (rand() % 25);
+    PalabraGenerada.cadenaA = alfabeto[numLetra];
   }
 
-  
-  
+  for (int k = 0; k < numRamdCorta; k++){
+    numLetra = (rand() % 25);
+    PalabraGenerada.cadenaB = alfabeto[numLetra];
+  }
+
+  return PalabraGenerada;  
 }
 
 int main(int argc, char *argv[]){
-  GeneradorDePalabras
+  PalabrasGenerador PalabraGenerada = GeneradorDePalabras();
+  int p = 0;
+  int q = strlen(PalabraGenerada.cadenaA);
+  int base = strlen(PalabraGenerada.cadenaB);
+  Solucion SolucionProblema = DivideVenceras(p, q, base);
+  cout << "El mayor num de concatenaciones de B en A es: " << SolucionProblema.NumConcatenaciones << endl;
+  cout << "El indice en el que empieza es: " << SolucionProblema.Indice << endl;
 }
