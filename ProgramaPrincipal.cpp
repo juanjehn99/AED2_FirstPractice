@@ -10,6 +10,9 @@ class Solucion{
   public:
     int NumConcatenaciones;
     int Indice;
+    char A[];
+    char B[];
+    int k, base, p, q;
 };
 
 class PalabrasGenerador{
@@ -18,7 +21,7 @@ class PalabrasGenerador{
     char cadenaB[];
 };
 
-Solucion ResolucionDirecta(int p, int q, int base, char A[], char B[]){
+Solucion SolucionDirecta(int p, int q, int base, char A[], char B[]){
   Solucion solucion;
     int i, j;
     bool anterior;
@@ -71,14 +74,23 @@ Solucion ResolucionDirecta(int p, int q, int base, char A[], char B[]){
         }
     }
     inicio = indicemax;
+    solucion.base = base;
     solucion.NumConcatenaciones = maxi;
     solucion.Indice = inicio;
+    solucion.p = p;
+    solucion.q = q;
+
+    for (int w = 0; w < sizeof(A); w++)
+    {
+        solucion.A[w] = A[w];
+    }
+    for (int y = 0; y < sizeof(B); y++)
+    {
+        solucion.B[y] = B[y];
+    }
 
     return solucion;
 }
-
-Solucion Combinar(){
-    }
 
 int Dividir(int p, int q){
   return round((q-p)/2);
@@ -95,12 +107,39 @@ bool Pequeno(int p, int q, int base){
   int k;
   Solucion solucion;
   if (Pequeno(p, q, base)){
-      solucion = ResolucionDirecta(p, q, base, A, B);
+      solucion = SolucionDirecta(p, q, base, A, B);
   }
   else {
     k = Dividir(p, q);
+    solucion.k = k;
     solucion = Combinar(DivideVenceras(p, k-1, base, A, B), DivideVenceras(k, q, base, A, B));
   }
+}
+
+Solucion Combinar(Solucion solucion1, Solucion solucion2)
+{
+    Solucion solucionFinal;
+    char NuevoArray[solucion1.k + solucion1.base - 2];
+
+    for (int w = 0; w < (solucion1.k + solucion1.base - 2); w++)
+    {
+           NuevoArray[w] = solucion1.A[w];
+    }
+
+    Solucion NuevaSolucion = DivideVenceras(solucion1.p, solucion1.k + solucion1.base - 2, solucion1.base, NuevoArray, solucion1.B);
+
+    if (NuevaSolucion.NumConcatenaciones >= solucion2.NumConcatenaciones)
+    {
+        solucionFinal.NumConcatenaciones = NuevaSolucion.NumConcatenaciones;
+        solucionFinal.Indice = NuevaSolucion.Indice;
+        return solucionFinal;
+    }
+    else
+    {
+        solucionFinal.NumConcatenaciones = solucion2.NumConcatenaciones;
+        solucionFinal.Indice = solucion2.Indice;
+        return solucionFinal;
+    }
 }
 
 PalabrasGenerador GeneradorDePalabras(){
