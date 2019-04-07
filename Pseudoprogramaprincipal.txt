@@ -1,13 +1,10 @@
 ﻿//Programa principal.
 
 
-SolucionDirecta(p, q: indice)
-var i, j, n, m : int
+SolucionDirecta(p, q, base: integer, A, B: array of char)
+var i, j : int
 var maxi, indicemaxi, indice, contador, repeticion, inicio : int
 var anterior : boolean
-
-var A[n] of char
-var B[m] of char
 
 contador := 0;
 repeticion := 0;
@@ -16,9 +13,9 @@ anterior := false
 i := 0;
 indicemax := 0;
 
-mientras i < n hacer
+mientras i < q-p hacer
 	j := 0
-  	mientras (A[i] = B[j]) && (i < n) hacer 
+  	mientras (A[i] = B[j]) && (i < q-p) hacer 
   		i+=1
 	  	repeticion := 0
 	  	anterior := false
@@ -26,15 +23,15 @@ mientras i < n hacer
 	i+=1
 	j+=1
 	contador+=1
-	mientras (contador < m)
+	mientras (contador < base)
 		si (A[i] = B[j])
-			si (contador = m-1)
+			si (contador = base-1)
 				repeticion+=1
 				i+=1
 				j := 0
 				contador := 0
 				si (anterior = false) 
-					indice = (i + 1) - m
+					indice = (i + 1) - base
 				fin_si
 				anterior = true
 			sino
@@ -43,7 +40,7 @@ mientras i < n hacer
 				i+=1
 			fin_si
 		sino
-			contador := m
+			contador := base
 		fin_si
 	fin_mientras
 
@@ -55,23 +52,15 @@ mientras i < n hacer
 fin_mientras
 inicio := indicemax
 
-	
-	Imprimir("Numero de veces que aparece B es: ", maxi)
-	
-	si (inicio = 0)
-		Imprimir("No hay indice posible")
-	sino
-		Imprimir("El valor de inicio de la concatenacion mas grande es: ", inicio)
-	fin_si
+//Almacenamos en los campos de un objeto las soluciones, en este caso, los nombres de los campos son numConcatenaciones, e Indice.
 
-
-DivideVenceras (p, q: indice)
+DivideVenceras (p, q, base: integer, A, B: array of char)
 var k: indice
 	si Pequeño (p, q) entonces
-		solucion := SolucionDirecta(p, q)
+		solucion := SolucionDirecta(p, q, base, A, B)
 	sino
 		k := Dividir(p,q)
-		solucion := Combinar(DivideYVencerás(p, k-1), DivideYVencerás(k, q))
+		solucion := Combinar(DivideYVencerás(p, k-1, base, A, B), DivideYVencerás(k, q, base, A, B))
 
 //Dividir método.
 
@@ -80,7 +69,7 @@ Dividir(p,q)
 
 //Pequeño método:
 
-Pequeño(p, q)
+Pequeño(p, q, base)
 	if q - p <= base
 	   return true
 	else

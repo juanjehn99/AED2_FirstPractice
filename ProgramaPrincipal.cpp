@@ -105,8 +105,6 @@ bool Pequeno(int p, int q, int base){
 
 PalabrasGenerador GeneradorDePalabras(){
   PalabrasGenerador PalabraGenerada;
-  string CadenaLarga;
-  string CadenaCorta;
   int numRandLarga;
   int numRandCorta;
   char Alfabeto[26];
@@ -124,7 +122,7 @@ PalabrasGenerador GeneradorDePalabras(){
     PalabraGenerada.cadenaA[j] = alfabeto[numLetra];
   }
 
-  for (int k = 0; k < numRamdCorta; k++){
+  for (int k = 0; k < numRandCorta; k++){
     numLetra = (rand() % 25);
     PalabraGenerada.cadenaB[k] = alfabeto[numLetra];
   }
