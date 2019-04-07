@@ -77,6 +77,9 @@ Solucion ResolucionDirecta(int p, int q, int base, char A[], char B[]){
     
 }
 
+Solucion Combinar(){
+    }
+
 int Dividir(int p, int q){
   return round((q-p)/2);
 }
@@ -132,9 +135,9 @@ PalabrasGenerador GeneradorDePalabras(){
 int main(int argc, char *argv[]){
   PalabrasGenerador PalabraGenerada = GeneradorDePalabras();
   int p = 0;
-  int q = sizeof(PalabraGenerada.cadenaA[]);
-  int base = sizeof(PalabraGenerada.cadenaB[]);  
-  Solucion SolucionProblema = DivideVenceras(p, q, base, PalabraGenerada.cadenaA[], PalabraGenerada.cadenaB[]);
+  int q = sizeof(PalabraGenerada.cadenaA);
+  int base = sizeof(PalabraGenerada.cadenaB);  
+  Solucion SolucionProblema = DivideVenceras(p, q, base, PalabraGenerada.cadenaA , PalabraGenerada.cadenaB);
   cout << "El mayor num de concatenaciones de B en A es: " << SolucionProblema.NumConcatenaciones << endl;
   cout << "El indice en el que empieza es: " << SolucionProblema.Indice << endl;
 }
