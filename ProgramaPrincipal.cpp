@@ -7,18 +7,20 @@
 using namespace std;
 
 class Solucion{
-  public:
-    int NumConcatenaciones;
-    int Indice;
-    char A[];
-    char B[];
-    int k, base, p, q;
+    public:
+        int NumConcatenaciones;
+        int Indice;
+        int k, Base, P, Q;
+        char Array[];
+        char Brray[];
 };
 
+
+
 class PalabrasGenerador{
-  public:
-    char cadenaA[];
-    char cadenaB[];
+    public:
+        char cadenaA[];
+        char cadenaB[];
 };
 
 Solucion SolucionDirecta(int p, int q, int base, char A[], char B[]){
@@ -74,19 +76,19 @@ Solucion SolucionDirecta(int p, int q, int base, char A[], char B[]){
         }
     }
     inicio = indicemax;
-    solucion.base = base;
+    solucion.Base = base;
     solucion.NumConcatenaciones = maxi;
     solucion.Indice = inicio;
-    solucion.p = p;
-    solucion.q = q;
+    solucion.P = p;
+    solucion.Q = q;
 
     for (int w = 0; w < sizeof(A); w++)
     {
-        solucion.A[w] = A[w];
+        solucion.Array[w] = A[w];
     }
     for (int y = 0; y < sizeof(B); y++)
     {
-        solucion.B[y] = B[y];
+        solucion.Brray[y] = B[y];
     }
 
     return solucion;
@@ -119,14 +121,14 @@ bool Pequeno(int p, int q, int base){
 Solucion Combinar(Solucion solucion1, Solucion solucion2)
 {
     Solucion solucionFinal;
-    char NuevoArray[solucion1.k + solucion1.base - 2];
+    char NuevoArray[solucion1.k + solucion1.Base - 2];
 
-    for (int w = 0; w < (solucion1.k + solucion1.base - 2); w++)
+    for (int w = 0; w < (solucion1.k + solucion1.Base - 2); w++)
     {
-           NuevoArray[w] = solucion1.A[w];
+           NuevoArray[w] = solucion1.Array[w];
     }
 
-    Solucion NuevaSolucion = DivideVenceras(solucion1.p, solucion1.k + solucion1.base - 2, solucion1.base, NuevoArray, solucion1.B);
+    Solucion NuevaSolucion = SolucionDirecta(solucion1.P, solucion1.k + solucion1.Base - 2, solucion1.Base, NuevoArray, solucion1.Brray);
 
     if (NuevaSolucion.NumConcatenaciones >= solucion2.NumConcatenaciones)
     {
