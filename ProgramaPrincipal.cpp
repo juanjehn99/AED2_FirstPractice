@@ -82,11 +82,11 @@ Solucion SolucionDirecta(int p, int q, int base, char A[], char B[]){
     solucion.P = p;
     solucion.Q = q;
 
-    for (int w = 0; w < sizeof(A); w++)
+    for (int w = 0; w < (int) sizeof(A); w++)
     {
         solucion.Array[w] = A[w];
     }
-    for (int y = 0; y < sizeof(B); y++)
+    for (int y = 0; y < (int) sizeof(B); y++)
     {
         solucion.Brray[y] = B[y];
     }
@@ -105,19 +105,6 @@ bool Pequeno(int p, int q, int base){
   else return false;
 }
 
- Solucion DivideVenceras(int p, int q, int base, char A[], char B[]){
-  int k;
-  Solucion solucion;
-  if (Pequeno(p, q, base)){
-      solucion = SolucionDirecta(p, q, base, A, B);
-  }
-  else {
-    k = Dividir(p, q);
-    solucion.k = k;
-    solucion = Combinar(DivideVenceras(p, k-1, base, A, B), DivideVenceras(k, q, base, A, B));
-  }
-}
-
 Solucion Combinar(Solucion solucion1, Solucion solucion2)
 {
     Solucion solucionFinal;
@@ -128,7 +115,8 @@ Solucion Combinar(Solucion solucion1, Solucion solucion2)
            NuevoArray[w] = solucion1.Array[w];
     }
 
-    Solucion NuevaSolucion = SolucionDirecta(solucion1.P, solucion1.k + solucion1.Base - 2, solucion1.Base, NuevoArray, solucion1.Brray);
+    Solucion NuevaSolucion = SolucionDirecta(solucion1.p, solucion1.k + solucion1.base - 2, solucion1.base, NuevoArray, solucion1.B);
+
 
     if (NuevaSolucion.NumConcatenaciones >= solucion2.NumConcatenaciones)
     {
@@ -142,6 +130,21 @@ Solucion Combinar(Solucion solucion1, Solucion solucion2)
         solucionFinal.Indice = solucion2.Indice;
         return solucionFinal;
     }
+}
+
+ Solucion DivideVenceras(int p, int q, int base, char A[], char B[]){
+  int k;
+  Solucion solucion;
+  if (Pequeno(p, q, base)){
+      solucion = SolucionDirecta(p, q, base, A, B);
+      return solucion;
+  }
+  else {
+    k = Dividir(p, q);
+    solucion.k = k;
+    solucion = Combinar(DivideVenceras(p, k-1, base, A, B), DivideVenceras(k, q, base, A, B));
+    return solucion;
+  }
 }
 
 PalabrasGenerador GeneradorDePalabras(){
@@ -171,6 +174,12 @@ int main(int argc, char *argv[]){
     int p = 0;
     int q = sizeof(PalabraGenerada.cadenaA);
     int base = sizeof(PalabraGenerada.cadenaB);
+
+    for(int i = 0; i < sizeof(PalabraGenerada.cadenaA); i++)
+    {
+        cout << PalabraGenerada.cadenaA[i];
+    }
+    cout << "He llegado aqui";
     Solucion SolucionProblema = DivideVenceras(p, q, base, PalabraGenerada.cadenaA , PalabraGenerada.cadenaB);
     cout << "El mayor num de concatenaciones de B en A es: " << SolucionProblema.NumConcatenaciones << endl;
     if (SolucionProblema.NumConcatenaciones == 0)
