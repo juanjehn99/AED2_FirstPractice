@@ -2,26 +2,19 @@
 #include <cmath>
 #include <cstdio>
 #include <cstdlib>
-#include <string>
+#include <string.h>
 
 using namespace std;
 
-class Solucion{
-  public:
+struct Solucion{
     int NumConcatenaciones;
     int Indice;
-    char A[];
-    char B[];
-    int k, base, p, q;
+    string A, B;
+    int k, p, q;
 };
 
-class PalabrasGenerador{
-  public:
-    char cadenaA[];
-    char cadenaB[];
-};
 
-Solucion SolucionDirecta(int p, int q, int base, char A[], char B[]){
+Solucion SolucionDirecta(int p, int q, string A, string B){
   Solucion solucion;
     int i, j;
     bool anterior;
@@ -45,15 +38,15 @@ Solucion SolucionDirecta(int p, int q, int base, char A[], char B[]){
         i++;
         j++;
         contador++;
-        while (contador<base) {
+        while (contador < (int)(B.size())) {
             if (A[i]==B[j]) {
-                if (contador==base-1) {
+                if (contador==(int)(B.size()-1)) {
                     repeticion++;
                     i++;
                     j = 0;
                     contador = 0;
                     if (anterior == false) {
-                        indice = (i+1) - base;
+                        indice = (i+1) - B.size();
                     }
                     anterior = true;
                 }
@@ -64,7 +57,7 @@ Solucion SolucionDirecta(int p, int q, int base, char A[], char B[]){
                 }
             }
             else {
-                contador = base;
+                contador = B.size();
             }
         }
         if (repeticion > maxi) {
@@ -74,30 +67,22 @@ Solucion SolucionDirecta(int p, int q, int base, char A[], char B[]){
         }
     }
     inicio = indicemax;
-    solucion.base = base;
     solucion.NumConcatenaciones = maxi;
     solucion.Indice = inicio;
     solucion.p = p;
     solucion.q = q;
-
-    for (int w = 0; w < (int) sizeof(A); w++)
-    {
-        solucion.A[w] = A[w];
-    }
-    for (int y = 0; y < (int) sizeof(B); y++)
-    {
-        solucion.B[y] = B[y];
-    }
+    solucion.A = A;
+    solucion.B = B;
 
     return solucion;
 }
 
 int Dividir(int p, int q){
-  return round((q-p)/2);
+  return round(((q-p)/2)+p);
 }
 
-bool Pequeno(int p, int q, int base){
-  if ((q - p) <= base){
+bool Pequeno(int p, int q, string B){
+  if ((q-p)/2 < (int) B.size()){
     return true;
   }
   else return false;
@@ -106,14 +91,14 @@ bool Pequeno(int p, int q, int base){
 Solucion Combinar(Solucion solucion1, Solucion solucion2)
 {
     Solucion solucionFinal;
-    char NuevoArray[solucion1.k + solucion1.base - 2];
+    string NuevoString;
 
-    for (int w = 0; w < (solucion1.k + solucion1.base - 2); w++)
+    for (int w = 0; w < ((int)(solucion1.k + solucion1.B.size() - 2)); w++)
     {
-           NuevoArray[w] = solucion1.A[w];
+           NuevoString[w] = solucion1.A[w];
     }
 
-    Solucion NuevaSolucion = SolucionDirecta(solucion1.p, solucion1.k + solucion1.base - 2, solucion1.base, NuevoArray, solucion1.B);
+    Solucion NuevaSolucion = SolucionDirecta(solucion1.p, solucion1.k + solucion1.B.size() - 2, NuevoString, solucion1.B);
 
     if (NuevaSolucion.NumConcatenaciones >= solucion2.NumConcatenaciones)
     {
@@ -129,55 +114,67 @@ Solucion Combinar(Solucion solucion1, Solucion solucion2)
     }
 }
 
- Solucion DivideVenceras(int p, int q, int base, char A[], char B[]){
+ Solucion DivideVenceras(int p, int q, string A, string B){
   int k;
   Solucion solucion;
-  if (Pequeno(p, q, base)){
-      solucion = SolucionDirecta(p, q, base, A, B);
+  if (Pequeno(p, q, B)){
+      solucion = SolucionDirecta(p, q, A, B);
       return solucion;
   }
   else {
     k = Dividir(p, q);
     solucion.k = k;
-    solucion = Combinar(DivideVenceras(p, k-1, base, A, B), DivideVenceras(k, q, base, A, B));
+    solucion = Combinar(DivideVenceras(p, k-1, A, B), DivideVenceras(k, q, A, B));
     return solucion;
   }
 }
 
-PalabrasGenerador GeneradorDePalabras(){
+/*PalabrasGenerador GeneradorDePalabras(){
   PalabrasGenerador PalabraGenerada;
-  int numRandLarga;
-  int numRandCorta;
-  char alfabeto[26]={'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'};
+    int tamanoN;
+    int tamanoM;
+    cout << "Introduce el tamaño de N: ";
+    cin >> tamanoN;
+    cout << "Introduce el tamaño de M: ";
+    cin >> tamanoM;
 
-  numRandLarga = rand();
-  numRandCorta = (rand() % 10) + 1;
+    char alfabeto[26]={'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'};
 
-  for (int j = 0; j < numRandLarga; j++){
-    int numLetra = (rand() % 25);
-    PalabraGenerada.cadenaA[j] = alfabeto[numLetra];
-  }
-
-  for (int k = 0; k < numRandCorta; k++){
-    int numLetra = (rand() % 25);
-    PalabraGenerada.cadenaB[k] = alfabeto[numLetra];
-  }
-
+    for (int j = 0; j < tamanoN; j++){
+        int numLetra = (rand() % 25);
+        PalabraGenerada.cadenaA[j] = alfabeto[numLetra];
+        cout << PalabraGenerada.cadenaA[j];
+    }
+    cout << endl;
+    for (int k = 0; k < tamanoM; k++){
+        int numLetra = (rand() % 25);
+        PalabraGenerada.cadenaB[k] = alfabeto[numLetra];
+        cout << PalabraGenerada.cadenaA[k];
+    }
+    cout << endl;
   return PalabraGenerada;
-}
+}*/
 
 int main(int argc, char *argv[]){
-    PalabrasGenerador PalabraGenerada = GeneradorDePalabras();
-    int p = 0;
-    int q = sizeof(PalabraGenerada.cadenaA);
-    int base = sizeof(PalabraGenerada.cadenaB);
+    //PalabrasGenerador PalabraGenerada = GeneradorDePalabras();
+    int tamanoN, tamanoM;
+    string A, B;
 
-    for(int i = 0; i < sizeof(PalabraGenerada.cadenaA); i++)
-    {
-        cout << PalabraGenerada.cadenaA[i];
-    }
-    cout << "He llegado aqui";
-    Solucion SolucionProblema = DivideVenceras(p, q, base, PalabraGenerada.cadenaA , PalabraGenerada.cadenaB);
+    cout << "Introduce el tamaño de N: ";
+    cin >> tamanoN;
+    cout << "Introduce el tamaño de M: ";
+    cin >> tamanoM;
+    cout << "Introduce A: ";
+    cin >> A;
+    cout << "Introduce B: ";
+    cin >> B;
+
+    int p = 0;
+   // int q = (int) sizeof(PalabraGenerada.cadenaA);
+   // int base = (int) sizeof(PalabraGenerada.cadenaB);
+    int q = tamanoN;
+
+    Solucion SolucionProblema = DivideVenceras(p, q, A, B);
     cout << "El mayor num de concatenaciones de B en A es: " << SolucionProblema.NumConcatenaciones << endl;
     if (SolucionProblema.NumConcatenaciones == 0)
     {
